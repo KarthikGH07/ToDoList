@@ -26,9 +26,22 @@ jobs:
       - name: Lint
         run: ./gradlew lint
 
+      - name: Upload lint result
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: lint-html-report
+          path: ./app/build/reports/lint-results-debug.html
+
       - name: Unit test
-        if: ${{ always() }}
         run: ./gradlew test
+
+      - name: Upload test result
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: test-html-report
+          path: ./app/build/reports/tests/testDebugUnitTest/index.html
 
       - name: Execute Gradle build
         run: ./gradlew build
