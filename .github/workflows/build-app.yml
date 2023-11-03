@@ -1,0 +1,30 @@
+name: Build App
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Lint
+        run: ./gradlew lint
+
+      - name: Unit test
+        if: ${{ always() }}
+        run: ./gradlew test
+
+      - name: Execute Gradle build
+        run: ./gradlew build
