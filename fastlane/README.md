@@ -29,7 +29,7 @@ Runs all the tests
 [bundle exec] fastlane android beta
 ```
 
-Generate new Beta build
+Generate new 'Demo Debug' build
 
 ### android deploy
 
@@ -37,7 +37,7 @@ Generate new Beta build
 [bundle exec] fastlane android deploy
 ```
 
-Generate new release build
+Generate new 'Full Release' build
 
 ----
 

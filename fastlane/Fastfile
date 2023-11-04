@@ -15,6 +15,12 @@ update_fastlane
 
 default_platform(:android)
 
+desc "Bump build version"
+   private_lane :bump_build_version do
+      increment_version_code(gradle_file_path: "app/build.gradle.kts")
+      # increment_version_name(gradle_file_path: "app/build.gradle.kts")
+end
+
 platform :android do
   desc "Runs all the tests"
   lane :test do
@@ -23,11 +29,13 @@ platform :android do
 
   desc "Generate new 'Demo Debug' build"
   lane :beta do
+    bump_build_version
     gradle(task: "clean assembledemoDebug")
   end
 
   desc "Generate new 'Full Release' build"
   lane :deploy do
+    bump_build_version
     gradle(task: "clean assembleFullRelease")
   end
 end
