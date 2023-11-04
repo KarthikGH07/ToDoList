@@ -35,7 +35,7 @@ jobs:
         if: always()
         with:
           name: lint-html-report
-          path: ./app/build/reports/lint-results-debug.html
+          path: ./app/build/reports/lint-results-demoDebug.html
 
       - name: Unit test
         run: ./gradlew test
@@ -45,7 +45,7 @@ jobs:
         if: failure()
         with:
           name: test-html-report
-          path: ./app/build/reports/tests/testDebugUnitTest/index.html
+          path: ./app/build/reports/tests/testdemoDebugUnitTest/index.html
 
       - name: Install fastlane
         run: bundle install
