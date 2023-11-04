@@ -53,5 +53,21 @@ jobs:
       - name: Generate 'Demo Debug' build
         run: bundle exec fastlane beta
 
+      - name: Retrieve Version
+        id: android_version
+        run: echo "VERSION=$(./gradlew -q printVersionInfo)" >> $GITHUB_OUTPUT
+
+      - name: Upload generated APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: demoDebug-${{ steps.android_version.outputs.VERSION }}
+          path: ./app/build/outputs/apk/
+
       - name: Generate 'Full Release' build
         run: bundle exec fastlane deploy
+
+      - name: Upload generated APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: fullRelease
+          path: ./app/build/outputs/apk/

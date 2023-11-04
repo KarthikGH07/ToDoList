@@ -53,6 +53,12 @@ android {
     lint {
         disable += "UnusedResources" + "TypographyFractions" + "TypographyQuotes"
     }
+
+    tasks.register("printVersionInfo") {
+        doLast {
+            println("v${defaultConfig.versionName} (${defaultConfig.versionCode})")
+        }
+    }
 }
 
 dependencies {
